@@ -1,0 +1,25 @@
+db_mysql:
+  image: mysql:5.6
+  ports      :
+    - "3306:3306"
+  environment:
+    MYSQL_DATABASE     : appdb
+    MYSQL_ROOT_PASSWORD: mysql_root_pass
+    MYSQL_USER         : mysql_user
+    MYSQL_PASSWORD     : mysql_pass
+  volumes:
+    - "./mysql-dat:/etc/mysql/conf.d"
+    - "./db:/var/lib/mysql"
+
+node:
+  env_file:
+    .env
+  build      : "./nodejs"
+  working_dir: "/app"
+  ports      :
+    - "80:80"
+  links:
+    - db_mysql    
+  volumes:
+    - "./server:/app"
+  command: "nodemon --config nodemon.json index.js"

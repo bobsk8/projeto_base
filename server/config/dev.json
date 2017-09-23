@@ -1,0 +1,12 @@
+{
+  "dbAccess": {
+    "DATABASE": "appdb",
+    "MYSQL_USER": "mysql_user",
+    "PASSWORD": "mysql_pass"
+  },
+  "dbHost": {
+    "host": "db_mysql",
+    "dialect": "mysql",
+    "logging": false
+  }
+}

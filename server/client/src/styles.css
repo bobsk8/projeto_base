@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(assets/scss/vendor/bootstrap.css);
+.container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 70%;
+    height: 70%;
+   }

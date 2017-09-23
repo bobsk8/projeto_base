@@ -1,0 +1,12 @@
+{
+  "dbAccess": {
+    "DATABASE": "",
+    "MYSQL_USER": "root",
+    "PASSWORD": ""
+  },
+  "dbHost": {
+    "host": "",
+    "dialect": "mysql",
+    "logging": false
+  }
+}

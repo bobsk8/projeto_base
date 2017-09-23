@@ -1,0 +1,23 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <label>Nome:</label>
+    <input type="text" [(ngModel)]="client.name" class="form form-control"><br>
+    <button (click)="submit(client,modal)" class="btn btn-primary">Salvar</button>
+</div>
+
+<ng-template #modal let-close="close">
+
+    <div class="modal-dialog">
+        <h4 class="modal-title">
+            {{modalContent.title}}
+        </h4>
+        <div class="modal-body">
+            <p>
+                {{modalContent.body}}
+            </p>
+        </div>
+        <button type="button" data-dismiss="modal" (click)="close()" class="btn btn-default">Continuar</button>
+    </div>
+    
+</ng-template>
