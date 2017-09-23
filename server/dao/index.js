@@ -10,7 +10,8 @@ function server(config) {
             config.dbHost
         ),
 
-        clientDao = sequelize.import('./clientDao');
+        clientDao = sequelize.import('./clientDao'),
+        userDao = sequelize.import('./userDao');
 
     //Relations
 
@@ -26,12 +27,14 @@ function server(config) {
 
     module.exports = {
         sequelize,
-        clientDao
+        clientDao,
+        userDao
     };
 
     return {
         sequelize,
-        clientDao
+        clientDao,
+        userDao
     };
 }
 

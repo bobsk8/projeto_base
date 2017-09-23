@@ -1,3 +1,6 @@
+session_db:
+  image: redis:3.2.7-alpine
+
 db_mysql:
   image: mysql:5.6
   ports      :
@@ -19,7 +22,8 @@ node:
   ports      :
     - "80:80"
   links:
-    - db_mysql    
+    - db_mysql
+    - session_db    
   volumes:
     - "./server:/app"
   command: "nodemon --config nodemon.json index.js"

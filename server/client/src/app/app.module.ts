@@ -11,6 +11,10 @@ import { ClientService } from "./service/client.service";
 import { HomeComponent } from './routes/home/home.component';
 import { ClientCreateComponent } from './routes/client/client-create/client-create.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { LoginComponent } from './routes/login/login.component';
+import { AppService } from "./service/app.service";
+import { UserService } from "./service/user.service";
+import { UserCreateComponent } from './routes/user/create/user-create.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,9 @@ import { MenuComponent } from './components/menu/menu.component';
     ClientListComponent,
     HomeComponent,
     ClientCreateComponent,
-    MenuComponent
+    MenuComponent,
+    LoginComponent,
+    UserCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,7 @@ import { MenuComponent } from './components/menu/menu.component';
     FormsModule,
     NgbModule.forRoot()
   ],
-  providers: [ClientService],
+  providers: [ClientService, UserService,AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

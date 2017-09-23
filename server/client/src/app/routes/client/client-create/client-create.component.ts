@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from "../../../model/client";
 import { ClientService } from "../../../service/client.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { Modal } from "app/model/modal";
+import { Modal } from "../../../model/modal";
+import { AppService } from "../../../service/app.service";
+import { User } from "../../../model/user";
+
 
 
 @Component({
@@ -14,13 +17,21 @@ export class ClientCreateComponent implements OnInit {
 
   client: Client = new Client();
   modalContent = new Modal();
+  user: User = new User();
 
   constructor(
     private clientService: ClientService,
-    private activeModal: NgbModal
+    private activeModal: NgbModal,
+    private appService: AppService
   ) { }
 
   ngOnInit() {
+    this.appService.auth().subscribe(data => {      
+      if (!data.login) {        
+        this.appService.redirect('');
+      }      
+      this.user = data;            
+    });
   }
 
   submit(client,modal){
