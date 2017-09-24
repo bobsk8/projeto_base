@@ -6,14 +6,14 @@
 
 ## Instalação 
 
-Há 4 etapas para instalar o aplicativo no Linux. Com imagens de maquina virtual com docker pre-instalada eles podem ser reduzido.  
+Há 6 etapas para instalar o aplicativo no Linux. Com imagens de maquina virtual com docker pre-instalada eles podem ser reduzido.  
 
 1. *Instalar o Docker, Docker Compose e Angular CLI.
 2. Executar o comento npm install dentro de server/client.
 3. Entrar na pasta base do projeto e executar o segunte comando `sudo docker-compose up`.
 4. Entrar na pasta server/client e executar o seguinte comando `npm start`.
 5. Entrar no container do nodejs `sudo docker exec -it nome_container_nodejs bash` e executar `node bin/create-tables.js`
-5. Acessar no 'http://localhost:4200'.
+6. Acessar no 'http://localhost:4200'.
 
 ### * Intalação do Docker
 
