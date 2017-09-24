@@ -11,22 +11,31 @@ import { AppService } from "../../service/app.service";
 export class LoginComponent implements OnInit {
 
   user: User = new User();
+  public loading = false;
+  
   constructor(
     private userService: UserService,
     private appService: AppService
   ) { }
 
   ngOnInit() {
+    this.appService.auth().subscribe(data => {      
+      if (data.login) {        
+        this.appService.redirect('/home');
+      }            
+    });
   }
 
-  login(){   
+  login(){
+    this.loading = true;   
     this.userService.login(this.user)
-    .subscribe(d => {
-      if(d.login){
+    .subscribe(d => {      
+      if(d.login){        
         this.appService.redirect('/home')
       }else{
         alert('Login inválido')
       }
+      this.loading = false;
     });
   }
 }

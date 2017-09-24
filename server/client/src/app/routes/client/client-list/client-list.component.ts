@@ -3,6 +3,7 @@ import { ClientService } from "../../../service/client.service";
 import { Client } from "../../../model/client";
 import { AppService } from "../../../service/app.service";
 import { User } from "../../../model/user";
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-client-list',
@@ -20,15 +21,28 @@ export class ClientListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.appService.auth().subscribe(data => {      
-      if (!data.login) {        
+    this.appService.auth().subscribe(data => {
+      if (!data.login) {
         this.appService.redirect('');
-      }      
-      this.user = data;            
+      }
+      this.user = data;
     });
 
     this.clientService.getAll()
-    .subscribe(clients => this.clients = clients);
+      .subscribe(clients => this.clients = clients);
+  }
+
+  export() {
+    this.clientService.export()
+      .subscribe(d => {        
+        this.downloadFile(d)
+      })
+  }
+
+  downloadFile(d) {
+    let blob = d.blob();
+    let filename = 'report.xlsx';
+    FileSaver.saveAs(blob, filename);
   }
 
 }
