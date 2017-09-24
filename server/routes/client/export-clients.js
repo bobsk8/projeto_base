@@ -7,7 +7,7 @@ const
     headerBlack: {
        fill: {
         fgColor: {
-        rgb: 'FF000000'
+        rgb: 'FFFF0000'
          }
        },
       font: {
@@ -17,8 +17,25 @@ const
         sz: 12,
         bold: false,
         underline: false
-      }
+      },
+      alignment: {horizontal: 'center',wrapText: true},
     },
+    header: {
+      fill: {
+       fgColor: {
+       rgb: 'FF000000'
+        }
+      },
+     font: {
+       color: {
+         rgb: 'FFFFFFFF'
+       },       
+       sz: 16,
+       bold: false,
+       underline: false
+     },
+     alignment: {horizontal: 'center',wrapText: true},
+   },
     cellBlack: {      
         color: {
           rgb: 'FF000000'
@@ -30,7 +47,8 @@ const
           sz: 12,
           bold: false,
           underline: false
-        }
+        },
+        alignment: {horizontal: 'center',wrapText: true},
       
     },
     cellGreen: {
@@ -42,7 +60,7 @@ const
     }
   },
   heading = [
-    [{ value: 'ID', style: styles.headerBlack }, { value: 'name', style: styles.headerBlack }]    
+    [{ value: 'PLanilha de Exemplo', style: styles.header }]    
   ],
   specification = {
     id: { // <- the key should match the actual data key
@@ -59,11 +77,9 @@ const
     }
   };
 
-// const merges = [
-//   { start: { row: 1, column: 1 }, end: { row: 1, column: 10 } },
-//   { start: { row: 2, column: 1 }, end: { row: 2, column: 5 } },
-//   { start: { row: 2, column: 6 }, end: { row: 2, column: 10 } }
-// ]
+const merges = [
+  { start: { row: 1, column: 1 }, end: { row: 1, column: 2 } }  
+]
 
 let
   dataset = [];
@@ -75,8 +91,8 @@ module.exports = (req, res) => {
       [ 
         {
           name: 'Report', // <- Specify sheet name (optional)
-          //heading: heading, // <- Raw heading array (optional)
-          // merges: merges, // <- Merge cell ranges
+          heading: heading, // <- Raw heading array (optional)
+          merges: merges, // <- Merge cell ranges
           specification: specification, // <- Report specification
           data: dataset // <-- Report data
         }
