@@ -1,7 +1,7 @@
 export class Modal {
     constructor(
-      public title = 'Parabéns',
-      public body = 'Você escolheu a resposta certa',
+      public title?: string,
+      public body?: string,
       public footer?: string
     ) {}
   }

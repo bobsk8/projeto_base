@@ -5,8 +5,9 @@ const
 
 module.exports = (req, res) => {
   let
-    id = req.params.id;
+    id = req.params.id,
+    client = req.body;
 
-    clientModel.update(id).then(data => res.send(data));
+    clientModel.update(id,client).then(data => res.send(data));
 
 };

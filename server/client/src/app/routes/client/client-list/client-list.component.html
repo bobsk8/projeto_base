@@ -5,13 +5,42 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>Id</th>
         <th>Nome</th>
+        <th>Alterar</th>
+        <th>Excluir</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let client of clients">
+        <td>{{client.id}}</td>
         <td>{{client.name}}</td>
+        <td><button class="btn btn-primary" (click)="updateBtn(client, contentUpdate)">Alterar</button></td>
+        <td><button class="btn btn-danger" (click)="deleteBtn(client,content)">Excluir</button></td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">{{msg}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">        
+        </button>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Fechar</button>
+    </div>
+  </ng-template>
+
+<ng-template #contentUpdate let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <label for="name">Nome:</label>
+      <input type="text" class="form-control" id="name" placeholder="Entre com o nome" [(ngModel)]="clientUpdate.name" name="name">
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">        
+          </button>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click');update(content);">Fechar</button>
+    </div>
+  </ng-template>

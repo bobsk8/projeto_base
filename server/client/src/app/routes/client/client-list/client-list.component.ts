@@ -4,6 +4,7 @@ import { Client } from "../../../model/client";
 import { AppService } from "../../../service/app.service";
 import { User } from "../../../model/user";
 import * as FileSaver from 'file-saver';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-client-list',
@@ -13,11 +14,15 @@ import * as FileSaver from 'file-saver';
 export class ClientListComponent implements OnInit {
 
   clients: Client[] = [];
+  clientUpdate: Client = new Client();
   user: User = new User();
+  closeResult: string;
+  msg: string = '';
 
   constructor(
     private clientService: ClientService,
-    private appService: AppService
+    private appService: AppService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -28,13 +33,19 @@ export class ClientListComponent implements OnInit {
       this.user = data;
     });
 
+    this.getClients();
+  }
+
+  getClients() {
     this.clientService.getAll()
-      .subscribe(clients => this.clients = clients);
+      .subscribe(clients => {
+        this.clients = clients;
+      }, err => console.log(err));
   }
 
   export() {
     this.clientService.export()
-      .subscribe(d => {        
+      .subscribe(d => {
         this.downloadFile(d)
       })
   }
@@ -43,6 +54,52 @@ export class ClientListComponent implements OnInit {
     let blob = d.blob();
     let filename = 'report.xlsx';
     FileSaver.saveAs(blob, filename);
+  }
+
+  open(content: any) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  updateBtn(client, contentUpdate) {
+    Object.assign(this.clientUpdate, client);
+    this.open(contentUpdate);
+  }
+
+  deleteBtn(client, content) {
+    this.clientService.delete(client)
+      .subscribe(data => {
+        this.msg = 'Excluido com sucesso!';
+        this.open(content)
+        this.getClients();
+      }, err => console.log(err))
+  }
+
+  update(content: any) {
+    this.clientService.update(this.clientUpdate)
+      .subscribe(data => {
+        this.getClients();
+        this.clientUpdate = new Client();
+        this.msg = 'Alterado com sucesso!';
+        this.open(content)
+      }, err => console.log(err));
+  }
+
+  exclude(client: Client) {
+
   }
 
 }

@@ -41,9 +41,8 @@ export class ClientCreateComponent implements OnInit {
       this.modalContent.body = 'Seu cliente pode ser visualizado na tela de Lista Clientes';
       this.activeModal.open(modal).result
         .then(result => {
-          client = new Client();
+          this.appService.redirect('/client/list');
         });
-
     });
   }
 
