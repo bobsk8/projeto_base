@@ -2,10 +2,10 @@
   "dbAccess": {
     "DATABASE": "appdb",
     "MYSQL_USER": "mysql_user",
-    "PASSWORD": "mysql_pass"
+    "PASSWORD": "123456"
   },
   "dbHost": {
-    "host": "db_mysql",
+    "host": "130.211.204.38",
     "dialect": "mysql",
     "logging": false
   }
