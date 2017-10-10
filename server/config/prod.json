@@ -1,7 +1,7 @@
 {
   "dbAccess": {
     "DATABASE": "appdb",
-    "MYSQL_USER": "mysql_user",
+    "MYSQL_USER": "root",
     "PASSWORD": "123456"
   },
   "dbHost": {
