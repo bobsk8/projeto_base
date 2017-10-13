@@ -16,6 +16,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { AppService } from "./service/app.service";
 import { UserService } from "./service/user.service";
 import { UserCreateComponent } from './routes/user/create/user-create.component';
+import { GoogleService } from './service/google.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { UserCreateComponent } from './routes/user/create/user-create.component'
     LoadingModule,
     NgbModule.forRoot()
   ],
-  providers: [ClientService, UserService,AppService],
+  providers: [ClientService, UserService,AppService, GoogleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

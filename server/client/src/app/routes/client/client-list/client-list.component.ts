@@ -5,6 +5,7 @@ import { AppService } from "../../../service/app.service";
 import { User } from "../../../model/user";
 import * as FileSaver from 'file-saver';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { GoogleService } from '../../../service/google.service';
 
 @Component({
   selector: 'app-client-list',
@@ -22,7 +23,8 @@ export class ClientListComponent implements OnInit {
   constructor(
     private clientService: ClientService,
     private appService: AppService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private googleService: GoogleService
   ) { }
 
   ngOnInit() {
@@ -47,6 +49,13 @@ export class ClientListComponent implements OnInit {
     this.clientService.export()
       .subscribe(d => {
         this.downloadFile(d)
+      })
+  }
+
+  setSheets() {
+    this.googleService.setSheets(this.clients)
+      .subscribe(d => {
+        alert('Foi')
       })
   }
 

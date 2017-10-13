@@ -17,6 +17,7 @@
     "crypto": "^1.0.1",
     "express": "^4.15.4",
     "express-session": "^1.15.0",
+    "googleapis": "^22.2.0",
     "mysql": "^2.13.0",
     "node-excel-export": "^1.4.2",
     "sequelize": "^3.30.4"
