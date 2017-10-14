@@ -5,6 +5,7 @@ import { LoadingModule } from 'ngx-loading';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { FileUploadModule, FileSelectDirective } from 'ng2-file-upload/';
 
 import { AppComponent } from './app.component';
 import { ClientListComponent } from './routes/client/client-list/client-list.component';
@@ -17,6 +18,7 @@ import { AppService } from "./service/app.service";
 import { UserService } from "./service/user.service";
 import { UserCreateComponent } from './routes/user/create/user-create.component';
 import { GoogleService } from './service/google.service';
+import { UploadService } from './service/upload.service';
 
 @NgModule({
   declarations: [
@@ -34,9 +36,10 @@ import { GoogleService } from './service/google.service';
     HttpModule,
     FormsModule,
     LoadingModule,
+    FileUploadModule,
     NgbModule.forRoot()
   ],
-  providers: [ClientService, UserService,AppService, GoogleService],
+  providers: [ClientService, UserService,AppService, GoogleService, UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
