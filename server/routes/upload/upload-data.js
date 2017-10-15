@@ -1,19 +1,35 @@
-'use strict';
+'use strict'
 
-let 
+let
     multer = require('multer'),
-    DIR = './uploads/',
-    upload = multer({dest: DIR}).single('photo');
+    path = require('path'),
+    data = new Date(),
+    dataFormatada = ("0" + data.getDate()).substr(-2) + "_"
+        + ("0" + (data.getMonth() + 1)).substr(-2) + "_" + data.getFullYear();
+
+let
+    storage = multer.diskStorage({
+        destination: function (req, file, callback) {
+            callback(null, './uploads/')
+        },
+        filename: function (req, file, callback) {
+            callback(null, file.fieldname + '-' + dataFormatada + path.extname(file.originalname))
+        }
+    })
 
 
-module.exports = (req,res) => {
-    var path = '';
+module.exports = (req, res) => {
+    let upload = multer({
+        storage: storage,
+        fileFilter: function (req, file, callback) {
+            let ext = path.extname(file.originalname)
+            if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+                return callback(res.end('Only images are allowed'), null)
+            }
+            callback(null, true)
+        }
+    }).single('photo');
     upload(req, res, function (err) {
-       if (err) {
-         console.log(err);
-         return res.status(422).send("an Error occured")
-       }        
-       path = req.file.path;
-       return res.send("Upload Completed for "+path); 
- });
-}
+        res.end('File is uploaded')
+    })
+};
